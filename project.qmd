@@ -1,0 +1,54 @@
+---
+title: "Golden Retriever Health and Lifespan"
+format: html
+---
+
+```{r}
+#| label: setup
+#| message: false
+
+library(tidyverse)
+
+dogs <- read_csv("golden_retrievers.csv") |> 
+  mutate(
+    activity_level = factor(activity_level, levels = c("Low", "Moderate", "High")),
+    overall_health = factor(overall_health, levels = c("Poor", "Fair", "Good", "Excellent"))
+  )
+```
+
+![A Golden Retriever](golden_retriever.png)
+
+## Activity Level and Health
+
+```{r}
+#| label: activity-health-plot
+
+dogs |> 
+  ggplot(aes(x = activity_level, fill = overall_health)) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Golden Retriever Health by Activity Level",
+    x = "Activity Level",
+    y = "Proportion",
+    fill = "Overall Health"
+  ) +
+  theme_minimal()
+```
+
+## Weight and Lifespan
+
+```{r}
+#| label: weight-lifespan-plot
+
+dogs |> 
+  ggplot(aes(x = weight_lbs, y = lifespan_years, color = gender)) +
+  geom_point(alpha = 0.7, size = 2.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Weight vs. Lifespan in Golden Retrievers",
+    x = "Weight (lbs)",
+    y = "Lifespan (years)",
+    color = "Gender"
+  ) +
+  theme_minimal()
+```
