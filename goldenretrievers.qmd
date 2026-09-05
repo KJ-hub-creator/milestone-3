@@ -1,6 +1,10 @@
 ---
 title: "Golden Retriever Health and Lifespan"
-format: html
+format:
+  html:
+    theme: cosmo
+    css: style.css
+    toc: true
 ---
 
 ```{r}
